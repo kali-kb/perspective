@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <img src="{{profile.image.url}}" alt='profile.img' height='64' width='64'>
+   <h1>{{profile.name}}</h1>
+   <a href="{% url 'update_profile' profile.pk %}"><button>Edit</button></a> <button>Change Avatar</button><br>
+   Last Edited: {{profile.updated|timesince}}<br>
+   Bio: {{profile.bio.html|safe}}<br>
+   Followers: {{profile.followers}}<br>
+   Articles : {{profile.article.all.count}}
+{% endblock %}

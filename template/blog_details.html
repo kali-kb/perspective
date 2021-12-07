@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1><a href="{% url 'writer' article.pk %}">{{article.publisher}}</a></h1><br>
+    <h1>{{article.title}}</h1><br>
+    <h2>{{article.date|timesince}}</h2><br>
+     <p>{{article.body}}</p> <br>
+ 
+    <a href="{% url 'update_article' article.pk %}">Edit</a>
+    
+    <form action="{% url 'kudos_add' %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Kudos {{article.kudos.count}}</button>
+    </form>
+    <form method='post' action="{% url 'insightful' article.slug %}">
+    	{% csrf_token %}
+        <button type="submit" hx-post="{% url 'insightful' article.slug %}" hx-swap="outerHTML">Insightful {{ article.insightful.count }}</button>
+    </form>
+    
+    <button>Readers {{article.reader.count}}</button>
+    <button>Bookmark</button>
+    
+  
+    <form action="{% url 'archive' article.pk %}">
+       <button type="submit">Archive</button>
+    </form>
+    <button class="homebutton">Go home</button>
+    
+{% endblock %}

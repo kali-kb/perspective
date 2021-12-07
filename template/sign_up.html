@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+   
+   {{form}}
+   <a href="{% url 'login' %}">Already have an account?</a>
+   <script src='https://www.google.com/recaptcha/api.js'></script>
+   <div class="g-recaptcha" data-sitekey="6LdSV2ocAAAAAAHhnb9BpWo0ddMjOdy3Uqlki9Fg"></div>
+{% endblock %}

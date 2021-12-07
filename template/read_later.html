@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   {% for b in bookmark %}
+      <h1><a href="{% url 'saved-article' %}">{{ b.article }}</a></h1><br>
+   {% endfor %}
+{% endblock %}

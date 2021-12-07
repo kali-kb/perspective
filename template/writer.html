@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+   
+   <img src="{% static 'writer.image.urls' %}">
+   <h1>{{writer.name}}</h1>
+   Bio:<p>{{writer.bio}}</p>
+   Followers: {{writer.follower.count}}
+   Articles: {{writer.article.all.count}}
+   Monthly readers: 0<br>
+   {% comment %}
+   {% if followed %}
+     <form method='post' action="{% url 'follow' writer.id %}">
+      {% csrf_token %}
+      <button type='submit'>Unfollow</button>
+     </form>
+     
+   {% elif %}
+   {% endcomment %}
+     <form method='post' action="{% url 'follow' writer.id %}">
+       {% csrf_token %}
+       <button type='submit'>Follow</button>
+     </form>
+
+    
+   
+   
+{% endblock %}

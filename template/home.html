@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a href="#">Home</a>
+    <a href="#">Search</a>
+    {% comment %}
+    <form method="">
+    	<input type="text">
+        <button>Search</button>
+    </form>
+    {% endcomment %}
+    <a href="#">Notification</a><br>
+    <a href="{% url 'articles' %}">Articles</a><br>
+    <a href="{% url 'profile' %}">Profile</a><br>
+    <a href="{% url 'read_later' %}">Read Later</a><br>
+    <a href="{% url 'profile_form' %}">Create Profile</a><br>
+    
+    <h2>Top writers</h2>
+    {% for writer in top_writer %}
+    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+     <img src="{{writer.image.url}}" alt="writer.jpg" height="16" width="16"><div class="card-header">{{writer.name}}</div>
+    <div class="card-body">
+    <h5 class="card-title"><i class="bi bi-people-fill"></i></h5>
+    <ion-icon name="people-outline"></ion-icon> <small>{{writer.follower.all.count}}</small>
+    <ion-icon name="reader-outline"></ion-icon> <small>{{writer.article.all.count}}</small>
+    </div>
+    </div>
+    {% endfor %}
+    
+    
+    <h2>Top Article</h2>
+     
+    {% for article in top_article %}
+    
+    <div class="card mb-3" style="max-width: 520px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+    {% for tags in article.tags.names %}
+      <span class="badge rounded-pill bg-info text-dark">#{{tags}}</span>
+    {% endfor %}
+        <h5 class="card-title">{{article.title}}</h5>
+        <p class="card-text">{{article.body|truncatechars:25}}</p>
+        <p class="card-text"><small class="text-muted">{{article.date|timesince}} ago</small></p>
+       <ion-icon name="bulb-outline"></ion-icon> <small>{{article.insightful.count}}</small>
+        <ion-icon name="eye-outline"></ion-icon> <small>{{article.reader.count}}</small>
+       <ion-icon name="stopwatch-outline"></p></ion-icon> <small>{{article.readtime}} min</small>
+      </div>
+    </div>
+   </div>
+    </div>
+    {% endfor %}
+
+<h1>You might also like</h1>
+{% for post in similar_post %}
+   {{post}}
+{% endfor %}
+
+
+   
+  
+{% endblock %}
